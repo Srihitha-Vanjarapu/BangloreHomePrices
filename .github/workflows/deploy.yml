@@ -3,10 +3,10 @@ name: Flask App with Docker CI/CD
 on:
   push:
     branches:
-      - main
+      - Main
   pull_request:
     branches:
-      - main
+      - Main
 
 jobs:
   build-and-deploy:
