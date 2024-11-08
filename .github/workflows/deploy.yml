@@ -35,11 +35,11 @@ jobs:
         tags: ${{ secrets.DOCKER_USERNAME }}/bhp-site:latest
 
     # Step 5: Deploy (Optional - Update based on your deployment needs)
-    - name: Deploy to Server
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
-        docker pull ${{ secrets.DOCKER_USERNAME }}/bhp-site:latest
-        docker stop bhp || true
-        docker rm bhp || true
-        docker run -d -p 5000:5000 --name bhp ${{ secrets.DOCKER_USERNAME }}/bhp-site:latest
-        EOF
+    #- name: Deploy to Server
+     # run: |
+      #  ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+       # docker pull ${{ secrets.DOCKER_USERNAME }}/bhp-site:latest
+        #docker stop bhp || true
+        #docker rm bhp || true
+        #docker run -d -p 5000:5000 --name bhp ${{ secrets.DOCKER_USERNAME }}/bhp-site:latest
+        #EOF
