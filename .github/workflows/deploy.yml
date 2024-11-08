@@ -1,0 +1,50 @@
+name: Flask App with Docker CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Docker
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Step 3: Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/flask-app:latest .
+
+      # Step 4: Push Docker image to Docker Hub
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
+
+      # Step 5: Deploy using SSH (optional)
+      #- name: Deploy to Server
+       # if: github.ref == 'refs/heads/main'
+        #env:
+          #DEPLOY_SERVER: ${{ secrets.DEPLOY_SERVER }}
+          #DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          #DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        #run: |
+         #ssh -i "${{ secrets.DEPLOY_KEY }}" ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }} << 'EOF'
+          #docker pull ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
+          #docker stop flask-app || true
+          #docker rm flask-app || true
+          #docker run -d --name flask-app -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
+          #EOF
