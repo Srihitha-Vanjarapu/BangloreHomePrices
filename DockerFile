@@ -5,13 +5,13 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy the requirements file into the container
-COPY BangloreHomePrices/BangloreHomePrices/server/requirements.txt .
+COPY BangloreHomePrices/BangloreHomePrices/server/requirements.txt /app/
 
 # Install any necessary dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the container
-COPY BangloreHomePrices/server/.
+COPY BangloreHomePrices/BangloreHomePrices/server /app/
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
