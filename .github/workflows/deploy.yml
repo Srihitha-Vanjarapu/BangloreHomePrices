@@ -1,4 +1,4 @@
-name: Deploy Bangalore Home Prices
+name: Deploy Bangalore-Home-Prices
 
 on:
   push:
